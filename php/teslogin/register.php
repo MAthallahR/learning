@@ -15,7 +15,7 @@
 include("service/database.php");
 if(isset($_POST['register'])){
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     $check_sql = "SELECT * FROM users WHERE username = '$username'";
     $result = $db->query($check_sql);
@@ -25,19 +25,19 @@ if(isset($_POST['register'])){
     } else {
         $sql = "INSERT INTO users (username,password) VALUES ('$username','$password')";
 
-        if($db->query($sql)){
+    if($db->query($sql)){
             echo "register berhasil";
-        } else {
+    } else {
             echo "register gagal";
-        }
+    }
     }
 }
 ?>
-    <h1>CEPATKAN BAYAR</h1>
+    <h1>CEPATKAN DAFTAR</h1>
     <form action="register.php" method="post">
-        <input type="text" name="username" placeholder="namamu">
+        <input type="text" name="username" placeholder="namamu" required>
         <br>
-        <input type="password" name="password" placeholder="password">
+        <input type="password" name="password" placeholder="password" required>
         <br>
         <input type="submit" value="oke gas" name="register">
     </form>
