@@ -2,10 +2,10 @@
 $hostname="localhost";
 $username= "root";
 $password= "";
-$dbname= "inpo_logoin";
+$dbname= "inpo";
 $db= mysqli_connect($hostname,$username,$password,$dbname);
 if ($db->connect_error) {
-    echo "youre retarted";
-    die("". $conn->connect_error);
+    die("youre retarted". $db->connect_error);
 }
+echo "Connected successfully";
 ?>
