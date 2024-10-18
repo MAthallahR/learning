@@ -3,66 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Landing Page</title>
+    <link rel="icon" href="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" type="image/gif" >
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #303030;
+            background: linear-gradient(135deg, #6e7dff, #a2c2e8);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            font-family: 'Roboto', sans-serif;
         }
         .container {
-            background-color: white ;
-            display: flexbox;
-            gap: 10px;
+            background-color: white;
+            display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
-            border-radius: 5px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
-        
-        .linkmc1, .linkmc2 {
-            display: inline-block;
-            pointer-events: none;
+        .container:hover {
+            transform: scale(1.02);
+        }
+        .link{
             text-decoration: none;
+            width: 100%;
+            display: inline-block;
+            pointer-events: none; 
         }
-        
-        .isim1md, .isim2md {
+        .kotak{
             background-color: #51eefc;
             height: 75px;
-            width: 550px;
-            margin: 20px auto;
-            align-content: center;
+            width: 100%; 
+            margin: 20px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s, transform 0.3s;
             pointer-events: auto;
         }
-        
-        .isim1md:hover, .isim2md:hover {
+        .kotak:hover{
             background: #1269cc;
-            transition: all 0.3s;
-            transform: scale(1, 1.1);
+            transform: scale(1.05);
         }
-        
-        .isim1md:hover .isim1mc, .isim2md:hover .isim2mc {
-            color: 	#51eefc;
-            transition: all 0.3s;
-            font-weight: bold;
-            transform: scale(1, 0.90909);
-        }
-        
-        .isim1mc, .isim2mc {
+        .ltex{
             color: #1269cc;
+            font-size: 20px;
+            font-weight: bold;
             text-align: center;
+            transition: color 0.3s;
+        }
+        .kotak:hover .ltex{
+            color: #51eefc;
+        }
+        h1{
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        img {
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 align="center"><img src="https://media1.tenor.com/m/VHsiL8B8P0wAAAAC/shincore-wave-emoji.gif" height="30" width="50"> Hi There Please Select <img src="https://media1.tenor.com/m/VHsiL8B8P0wAAAAC/shincore-wave-emoji.gif" height="30" width="50"></h1>
-        <BR>
-        <a href="login.php" class="linkmc1"><div class="isim1md"><p class="isim1mc">LOGIN</p></div></a>
-        <a href="register.php" class="linkmc2"><div class="isim2md"><p class="isim2mc">REGISTER</p></div></a>
+        <h1 style="color: black;">
+            <img src="https://media1.tenor.com/m/VHsiL8B8P0wAAAAC/shincore-wave-emoji.gif" height="30" width="50"> 
+            Hi There! Please Select 
+            <img src="https://media1.tenor.com/m/VHsiL8B8P0wAAAAC/shincore-wave-emoji.gif" height="30" width="50">
+        </h1>
+        <a href="register.php" class="link">
+            <div class="kotak">
+                <p class="ltex">REGISTER</p>
+            </div>
+        </a>
+        <a href="login.php" class="link">
+            <div class="kotak">
+                <p class="ltex">LOGIN</p>
+            </div>
+        </a>
     </div>
 </body>
 </html>
