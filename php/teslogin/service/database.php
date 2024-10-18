@@ -7,5 +7,4 @@ $db= mysqli_connect($hostname,$username,$password,$dbname);
 if ($db->connect_error) {
     die("youre retarted". $db->connect_error);
 }
-echo "Connected successfully";
 ?>
