@@ -10,7 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <link rel="icon" href="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" type="image/gif" >
 </head>
 <style>
     ::-webkit-scrollbar {
@@ -18,6 +19,41 @@
     }
     body{
         background-color: #303030;
+    }
+    .reset{
+        margin-left: 1700px;
+        margin-top: -50px;
+        text-decoration: none;
+    }
+    .reset{
+        animation: rainbow 14s infinite;
+    }
+
+    @keyframes rainbow {
+        0% {
+            color: red;
+        }
+        14.28% {
+            color: orange;
+        }
+        28.57% {
+            color: yellow;
+        }
+        42.86% {
+            color: green;
+        }
+        57.14% {
+            color: blue;
+        }
+        71.43% {
+            color: indigo;
+        }
+        85.71% {
+            color: violet;
+        }
+        100% {
+            color: red;
+        }
     }
     .link{
         display: inline-block;
@@ -51,26 +87,26 @@
        text-align: center;
    }
    .username {
-    animation: color-change 10s infinite;
-}
+        animation: color-change 10s infinite;
+    }
 
-@keyframes color-change {
-    0% {
-        color: #8D3DB6;
+    @keyframes color-change {
+        0% {
+            color: #8D3DB6;
+        }
+        25% {
+            color: #F23700;
+        }
+        50% {
+            color: #00C2F3;
+        }
+        75% {
+            color: #F1E900;
+        }
+        100% {
+            color: #D4000C;
+        }
     }
-    25% {
-        color: #F23700;
-    }
-    50% {
-        color: #00C2F3;
-    }
-    75% {
-        color: #F1E900;
-    }
-    100% {
-        color: #D4000C;
-    }
-}
 .gif {
   transition: transform 0.2s;
 }
@@ -80,7 +116,14 @@
 }
 </style>
 <body>
-    <h1 align="center"><img src="https://media.tenor.com/sz7KS3CUyfsAAAAi/chie-satonaka.gif" height="50" width="50"> Hi <span  class="username"><?php echo ucfirst($_SESSION['username']); ?></span> <img src="https://media.tenor.com/ax1MmuY9BYMAAAAi/vibing-aigis.gif" height="50" width="50"></h1>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <h1 align="center" class="judul">
+            <img src="https://media.tenor.com/sz7KS3CUyfsAAAAi/chie-satonaka.gif" height="50" width="50"> 
+            Hi <span class="username"><?php echo ucfirst($_SESSION['username']); ?></span> 
+            <img src="https://media.tenor.com/ax1MmuY9BYMAAAAi/vibing-aigis.gif" height="50" width="50">
+        </h1>
+        <a href="reset.php" class="reset">reset password</a>
+    </div>
     <img class="gif" src="https://media.tenor.com/rNhsfkZgcK0AAAAj/chelsea-fc-sports.gif" alt="" style="width: 250px;">
     <img class="gif" src="https://media.tenor.com/0MpGA0coe_AAAAAM/kotone-shiomi-kotone.gif" alt="">
     <img class="gif" src="https://media.tenor.com/bvqgIKH-u_sAAAAM/cole-palmer-cole-jermaine-palmer.gif" alt="">
@@ -105,6 +148,9 @@
     <img class="gif" src="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" alt="" style="width: 300px;">
     <img class="gif" src="https://media.tenor.com/yToZSCyViUQAAAAM/kasumi-persona5.gif" alt="">
     <img class="gif" src="https://media.tenor.com/va0pIiO-yk4AAAAM/cole-cole-palmer.gif" alt="" style="width: 300px; display: block; margin: 0 auto;">
+        <br>
+        <br>
+        <br>
     <a href="logout.php" class="link"><div class="kotak"><p class="text">LOGOUT</p></div></a>
 </body>
 </html>
