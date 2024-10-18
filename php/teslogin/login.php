@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="icon" href="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" type="image/gif" >
 </head>
 <style>
     body{
@@ -21,27 +22,63 @@
         align-items: center;
         padding: 20px;
         border-radius: 5px;
-        height: 415px;
+        height: 400px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    .usn, .pw, .email{
-        margin-bottom: 10px;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
+    .container {
         width: 100%;
-        box-sizing: border-box; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .input {
+        width: 300px;
+        height: 30px;
+        font-size: 16px;
+        outline: none;
+        padding: 6px 16px;
         border: 1px solid rgba(0, 0, 0, 0.233);
+        border-radius: 4px;
+        gap: 10px;
     }
-    .usn:hover, .pw:hover, .email:hover{
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    .input-group {
+        position: relative;
+        margin-bottom: 15px
     }
-    .usn:focus, .pw:focus, .email:focus{
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        font-size: larger;
-        transition: font-size .5s;
+    .input-group .input:focus {
+        border-color: #3e8e41;
+    }
+    .input-group label {
+        position: absolute;
+        cursor: text;
+        user-select: none;
+        pointer-events: none; 
+        top: 14px;
+        left: 10px;
+        font-size: 12px;
+        font-weight: bold;
+        background: #fff;
+        padding: 0 5px;
+        color: #999;
+        transition: all .3s ease;
+    }
+    .input-group input:focus + label {
+        top: -5px;
+        color: #3e8e41;
+        font-size: 11px;
+    }
+    .input-group input.has-value + label {
+        top: -5px;
+        font-size: 11px;
+    }
+    .input-group input.has-value {
+        border-color: #3e8e41;
+    }
+    .input-group input.has-value + label {
+        top: -5px;
+        font-size: 11px;
+        color: #3e8e41;
     }
     .login{
         background-color: #4CAF50;
@@ -50,57 +87,114 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        transition: background-color 0.5s, font-size 0.5s;
+        width: 150px; 
     }
     .login:hover{
         background-color: #3e8e41;
         font-size: larger;
         transition: font-size .5s;
     }
+    .hehe{
+        animation: rainbow 14s infinite;
+        text-decoration: none;
+    }
+    @keyframes rainbow {
+        0% {
+            color: red;
+        }
+        14.28% {
+            color: orange;
+        }
+        28.57% {
+            color: yellow;
+        }
+        42.86% {
+            color: green;
+        }
+        57.14% {
+            color: blue;
+        }
+        71.43% {
+            color: indigo;
+        }
+        85.71% {
+            color: violet;
+        }
+        100% {
+            color: red;
+        }
+    }
 </style>
 <body>
     <form action="login.php" method="post">
-    <h1>CEPATKAN LOGIN</h1>
-        <input type="text" name="username" placeholder="nama" required class="usn">
-        <br>
-        <input type="email" name="email" placeholder="email" required class="email">
-        <br>
-        <input type="password" name="password" placeholder="password" class="pw">
-        <br>
-        <input type="submit" value="oke gas" name="login" class="login"> 
-        <br>
-        <p> belum punya akun? <a href="register.php">REGISTER</a></p>
+    <h1>LOGIN</h1>
+    <div class="container">
+        <div class="input-group">
+            <input type="text" class="input" name="username" autocomplete="off" required>
+            <label for="input">Username</label>
+          </div>
+        </div>
+        <div class="container">
+        <div class="input-group">
+            <input type="email" class="input" name="email" autocomplete="off" required>
+            <label for="input">Email</label>
+          </div>
+        </div>
+        <div class="container">
+        <div class="input-group">
+            <input type="password" class="input" name="password" autocomplete="off" required>
+            <label for="input">Password</label>
+          </div>
+        </div>
+        <input type="submit" value="Login" name="login" class="login"> 
+        <p>don't have an account yet? <a href="register.php" class="hehe">Register</a></p>
         <?php
-include("service/database.php");
-session_start();
+        include("service/database.php");
+        session_start();
 
-if (isset($_POST['login'])) {
-    $username = $_POST['username']; // Mengambil Username
-    $password = $_POST['password']; // Mengambil Password
-    $email = $_POST['email']; // Mengambil Email
-
-    // Mengecek apa password lebih dari 8 kata atau tidak
-    if (strlen($password) < 8) {
-        echo "password harus lebih dari 8 kata";
-    } else {
-        $sql = "SELECT * FROM users WHERE username='$username' OR email='$email'";
-        $result = $db->query($sql);
-
-        if ($result->num_rows > 0) {
-            $data = $result->fetch_assoc();
-            // Mengecek password
-            if (password_verify($password, $data["password"])) {
-                $_SESSION["username"] = $data["username"];
-                header("Location: dashboard.php");
-                exit();
+        if (isset($_POST['login'])) {
+            $username = $_POST['username']; // Mengambil Username // Get Username
+            $email = $_POST['email']; // Mengambil Email // Get Email
+            $password = $_POST['password']; // Mengambil Password // Get Password
+        
+            // Mengecek apa password lebih dari 8 kata atau tidak
+            // Check whether the password is more than 8 words or not
+            if (strlen($password) < 8) {
+                echo "password must be more than 8 words";
             } else {
-                echo "password salah";
+                $sql = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+                $result = $db->query($sql);
+            
+                if ($result->num_rows > 0) {
+                    $data = $result->fetch_assoc();
+                    // Mengecek password
+                    // Checking the password
+                    if (password_verify($password, $data["password"])) {
+                        $_SESSION["username"] = $data["username"];
+                        header("Location: dashboard.php");
+                        exit();
+                    } else {
+                        echo "password incorrect";
+                    }
+                } else {
+                    echo "account not found maybe you have to register first !";
+                }
             }
-        } else {
-            echo "akun tidak ditemukan";
         }
-    }
-}
-?>
+        ?>
+        <script>
+        const inputFields = document.querySelectorAll('.input-group input');
+        inputFields.forEach(inputField => {
+          inputField.addEventListener('input', () => {
+            if (inputField.value.trim() !== '') {
+              inputField.classList.add('has-value');
+            } else {
+                  inputField.classList.remove('has-value');
+            }
+          });
+        });
+        </script>
     </form>
 </body>
 </html>
