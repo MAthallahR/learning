@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="icon" href="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" type="image/gif" >
 </head>
 <style>
     body{
@@ -95,19 +96,33 @@
         transition: font-size .5s;
     }
     .hehe{
-        background: linear-gradient(90deg, red, orange, yellow, green, blue, purple);
-        background-size: 400px 100%;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: rainbow 2s infinite;
+        animation: rainbow 14s infinite;
+        text-decoration: none;
     }
     @keyframes rainbow {
         0% {
-            background-position: 0% 50%;
+            color: red;
+        }
+        14.28% {
+            color: orange;
+        }
+        28.57% {
+            color: yellow;
+        }
+        42.86% {
+            color: green;
+        }
+        57.14% {
+            color: blue;
+        }
+        71.43% {
+            color: indigo;
+        }
+        85.71% {
+            color: violet;
         }
         100% {
-            background-position: 100% 50%;
+            color: red;
         }
     }
 </style>
@@ -136,6 +151,7 @@
         <p>already have an account? <a href="login.php" class="hehe">Login</a></p>
         <?php
         include("service/database.php");
+        
         if(isset($_POST['register'])){
             $username = $_POST['username']; // Mengambil Username // Get Username
             $email = $_POST['email']; // Mengambil Email // Get Email
@@ -147,7 +163,7 @@
                 echo "password must be more than 8 words";
             } else {
                 // Menyamarkan password jika sudah lebih dari 8 kata (kenapa harus disamarkan? karena function password_verify di login hanya bekerja jika di samarkan :D ) 
-                //Disguise the password if it has more than 8 words (why does it have to be disguised? because the password_verify function at login only works if it is disguised :D )
+                // Disguise the password if it has more than 8 words (why does it have to be disguised? because the password_verify function at login only works if it is disguised :D )
                 $hash_password = password_hash($password, PASSWORD_BCRYPT);
 
                 // Cek jika nama atau email sudah ada atau belum
@@ -167,7 +183,7 @@
                     // Enter data into the database
                     $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$hash_password', '$email')";
                     if ($db->query($sql)) {
-                        echo "register succeed , you can login!";
+                        echo '<p>register succeed , you can <a href="login.php" class="hehe">Login</a> now !</p>';
                     } else {
                         echo "register failed";
                     }
