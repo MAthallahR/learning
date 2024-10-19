@@ -163,7 +163,7 @@
             if (strlen($password) < 8) {
                 echo "password must be more than 8 words";
             } else {
-                $sql = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+                $sql = "SELECT * FROM users WHERE username='$username' AND email='$email'";
                 $result = $db->query($sql);
             
                 if ($result->num_rows > 0) {
@@ -172,6 +172,7 @@
                     // Checking the password
                     if (password_verify($password, $data["password"])) {
                         $_SESSION["username"] = $data["username"];
+                        $_SESSION["email"] = $data["email"];    
                         header("Location: dashboard.php");
                         exit();
                     } else {
