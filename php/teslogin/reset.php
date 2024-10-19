@@ -172,12 +172,14 @@
                 $result->execute();
                 $getresult = $result->get_result();
 
-                if ($getresult->num_rows > 0) {
-                    $user = $getresult->fetch_assoc();
+                if ($getresult->num_rows == 0) {
+                    echo "account not found maybe you have to remember it first !";;
+                } else {
+                    $data = $getresult->fetch_assoc();
 
                     // Mengecek apakah password lama cocok
                     // Check if the old password matches
-                    if (password_verify($old_password, $user['password'])) {
+                    if (password_verify($old_password, $data['password'])) {
 
                         // Mengecek apakah password baru sama dengan password lama
                         // Check if the new password is the same as the old password
