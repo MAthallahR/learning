@@ -72,9 +72,6 @@
         top: -5px;
         font-size: 11px;
     }
-    .input-group input.has-value {
-        border-color: #3e8e41;
-    }
     .input-group input.has-value + label {
         top: -5px;
         font-size: 11px;
@@ -179,11 +176,11 @@
 
                     // Mengecek apakah password lama cocok
                     // Check if the old password matches
-                    if (password_verify($old_password, $data['password'])) {
+                    if (password_verify(($old_password), $data['password'])) {
 
                         // Mengecek apakah password baru sama dengan password lama
                         // Check if the new password is the same as the old password
-                        if ($old_password === $new_password) {
+                        if (strtolower($old_password) === strtolower($new_password)) {
                             echo "The new password cannot be the same as the old one";
                         } else {
 
