@@ -72,9 +72,6 @@
         top: -5px;
         font-size: 11px;
     }
-    .input-group input.has-value {
-        border-color: #3e8e41;
-    }
     .input-group input.has-value + label {
         top: -5px;
         font-size: 11px;
@@ -162,8 +159,8 @@
             if (strlen($password) < 8) {
                 echo "password must be more than 8 words";
             } else {
-                // Menyamarkan password jika sudah lebih dari 8 kata (kenapa harus disamarkan? karena function password_verify di login hanya bekerja jika di samarkan :D ) 
-                // Disguise the password if it has more than 8 words (why does it have to be disguised? because the password_verify function at login only works if it is disguised :D )
+                // Menyamarkan password jika sudah lebih dari 8 kata (kenapa harus disamarkan? karena function password_verify di login hanya bekerja jika di samarkan (kayaknya)) 
+                // Disguise the password if it has more than 8 words (why does it have to be disguised? because the password_verify function at login only works if it is disguised (i guess))
                 $hash_password = password_hash($password, PASSWORD_BCRYPT);
 
                 // Cek jika nama atau email sudah ada atau belum
@@ -173,9 +170,9 @@
 
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    if ($row["username"] == $username) {
+                    if ($row["username"] == strtolower($username)) {
                         echo "your name is already used";
-                    } elseif ($row["email"] == $email) {
+                    } elseif ($row["email"] == strtolower($email)) {
                         echo "your email is already used";
                     }
                 } else {
