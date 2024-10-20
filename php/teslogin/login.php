@@ -41,6 +41,7 @@
         border: 1px solid rgba(0, 0, 0, 0.233);
         border-radius: 4px;
         gap: 10px;
+        
     }
     .input-group {
         position: relative;
@@ -71,9 +72,6 @@
     .input-group input.has-value + label {
         top: -5px;
         font-size: 11px;
-    }
-    .input-group input.has-value {
-        border-color: #3e8e41;
     }
     .input-group input.has-value + label {
         top: -5px;
