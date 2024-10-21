@@ -26,13 +26,13 @@
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    .container {
+    .container{
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    .input {
+    .input{
         width: 300px;
         height: 30px;
         font-size: 16px;
@@ -41,15 +41,17 @@
         border: 1px solid rgba(0, 0, 0, 0.233);
         border-radius: 4px;
         gap: 10px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .input-group {
+    .input-group{
         position: relative;
-        margin-bottom: 15px
+        margin-bottom: 15px;
     }
-    .input-group .input:focus {
+    .input:focus{
         border-color: #3e8e41;
+        box-shadow: 0 0 5px rgba(62, 142, 65, 0.7), 0 0 10px rgba(62, 142, 65, 0.5); 
     }
-    .input-group label {
+    .input-group label{
         position: absolute;
         cursor: text;
         user-select: none;
@@ -62,17 +64,15 @@
         padding: 0 5px;
         color: #999;
         transition: all .3s ease;
+        border-radius: 5px; 
     }
-    .input-group input:focus + label {
+    .input-group input:focus + label{
         top: -5px;
         color: #3e8e41;
         font-size: 11px;
+
     }
-    .input-group input.has-value + label {
-        top: -5px;
-        font-size: 11px;
-    }
-    .input-group input.has-value + label {
+    .input-group input.has-value + label{
         top: -5px;
         font-size: 11px;
         color: #3e8e41;
@@ -96,26 +96,23 @@
         animation: rainbow 14s infinite;
         text-decoration: none;
     }
-    @keyframes rainbow {
+    @keyframes rainbow{
         0% {
             color: red;
         }
-        14.28% {
+        15% {
             color: orange;
         }
-        28.57% {
+        30% {
             color: yellow;
         }
-        42.86% {
+        45% {
             color: green;
         }
-        57.14% {
+        60% {
             color: blue;
         }
-        71.43% {
-            color: indigo;
-        }
-        85.71% {
+        75% {
             color: violet;
         }
         100% {
