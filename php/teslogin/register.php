@@ -167,9 +167,9 @@
 
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    if ($row["username"] == strtolower($username)) {
+                    if (strtolower($row["username"]) == strtolower($username)) {
                         echo "your name is already used";
-                    } elseif ($row["email"] == strtolower($email)) {
+                    } elseif (strtolower($row["email"]) == strtolower($email)) {
                         echo "your email is already used";
                     }
                 } else {
