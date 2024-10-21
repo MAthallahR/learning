@@ -159,23 +159,31 @@
             if (strlen($password) < 8) {
                 echo "password must be more than 8 words";
             } else {
-                $sql = "SELECT * FROM users WHERE username='$username' AND email='$email'";
+                // Mengecek email
+                // Checking email
+                $sql = "SELECT * FROM users WHERE email='$email'";
                 $result = $db->query($sql);
             
                 if ($result->num_rows > 0) {
                     $data = $result->fetch_assoc();
-                    // Mengecek password
-                    // Checking the password
-                    if (password_verify($password, $data["password"])) {
-                        $_SESSION["username"] = $data["username"];
-                        $_SESSION["email"] = $data["email"];    
-                        header("Location: dashboard.php");
-                        exit();
-                    } else {
-                        echo "password incorrect";
+                    // Mengecek username ada atau tidak
+                    // Check whether the username exists or not
+                    if ($data["username"] == $username) {
+                        // Mengecek password
+                        // Checking the password
+                        if (password_verify($password, $data["password"])) {
+                            $_SESSION["username"] = $data["username"];
+                            $_SESSION["email"] = $data["email"];    
+                            header("Location: dashboard.php");
+                            exit();
+                        } else {
+                            echo "password incorrect";
+                        }
+                    }else{
+                        echo "username is wrong";
                     }
                 } else {
-                    echo "account not found maybe you have to register first !";
+                    echo "email not found maybe you have to register first !";
                 }
             }
         }
