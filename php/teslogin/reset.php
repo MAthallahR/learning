@@ -141,6 +141,7 @@
             </div>
         </div>
         <input type="submit" value="Reset" name="reset" class="reset"> 
+        <p>want to making sure? you can <a href="login.php" class="hehe">Login</a> again</p>
         <br>
         <?php
         include("service/database.php");
