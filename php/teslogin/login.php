@@ -99,22 +99,19 @@
         0% {
             color: red;
         }
-        14.28% {
+        15% {
             color: orange;
         }
-        28.57% {
+        30% {
             color: yellow;
         }
-        42.86% {
+        45% {
             color: green;
         }
-        57.14% {
+        60% {
             color: blue;
         }
-        71.43% {
-            color: indigo;
-        }
-        85.71% {
+        75% {
             color: violet;
         }
         100% {
