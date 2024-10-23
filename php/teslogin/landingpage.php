@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #6e7dff, #a2c2e8);
+            background: linear-gradient(90deg, #fff, #0FB0F4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,7 +24,7 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
         .container:hover {
             transform: scale(1.02);
@@ -44,13 +44,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: background 0.3s, transform 0.3s;
+            transition:all 0.3s;
             pointer-events: auto;
         }
         .kotak:hover{
             background: #1269cc;
             transform: scale(1.05);
+            box-shadow: 0 0 5px #51eefc, 0 0 10px #51eefc; 
+            animation: w 1s infinite;
         }
+        @keyframes w {
+            0% {
+                text-shadow: 0 0 10px rgb(32, 32, 255);
+            }
+            50% {
+                text-shadow: 0 0 20px rgb(32, 32, 255);
+            }
+            100% {
+                text-shadow: 0 0 10px rgb(32, 32, 255);
+            }
+        }
+        
         .ltex{
             color: #1269cc;
             font-size: 20px;
@@ -90,4 +104,5 @@
         </a>
     </div>
 </body>
+
 </html>
