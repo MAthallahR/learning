@@ -127,19 +127,19 @@
             <input type="text" class="input" name="username" autocomplete="off" required>
             <label for="input">Username</label>
           </div>
-        </div>
-        <div class="container">
+    </div>
+     <div class="container">
         <div class="input-group">
             <input type="email" class="input" name="email" autocomplete="off" required>
             <label for="input">Email</label>
           </div>
-        </div>
-        <div class="container">
+    </div>
+    <div class="container">
         <div class="input-group">
             <input type="password" class="input" name="password" autocomplete="off" required>
             <label for="input">Password</label>
           </div>
-        </div>
+    </div>
         <input type="submit" value="Login" name="login" class="login"> 
         <p>don't have an account yet? <a href="register.php" class="hehe">Register</a></p>
         <?php
@@ -150,37 +150,49 @@
             $username = $_POST['username']; // Mengambil Username // Get Username
             $email = $_POST['email']; // Mengambil Email // Get Email
             $password = $_POST['password']; // Mengambil Password // Get Password
-        
-            // Mengecek apa password lebih dari 8 kata atau tidak
-            // Check whether the password is more than 8 words or not
-            if (strlen($password) < 8) {
-                echo "password must be more than 8 words";
+
+             // Mengecek jika username mengandung spasi
+            // Check if the username contains spaces
+            if (strpos($username, ' ') !== false) {
+                echo "username cannot contain spaces";
             } else {
-                // Mengecek email
-                // Checking email
-                $sql = "SELECT * FROM users WHERE email='$email'";
-                $result = $db->query($sql);
-            
-                if ($result->num_rows > 0) {
-                    $data = $result->fetch_assoc();
-                    // Mengecek username ada atau tidak
-                    // Check whether the username exists or not
-                    if ($data["username"] == $username) {
-                        // Mengecek password
-                        // Checking the password
-                        if (password_verify($password, $data["password"])) {
-                            $_SESSION["username"] = $data["username"];
-                            $_SESSION["email"] = $data["email"];    
-                            header("Location: dashboard.php");
-                            exit();
-                        } else {
-                            echo "password incorrect";
-                        }
-                    }else{
-                        echo "username is wrong";
-                    }
+                // Mengecek jika password mengandung spasi
+                // Check if the password contains spaces
+                if (strpos($password, ' ') !== false) {
+                    echo "password cannot contain spaces";
                 } else {
-                    echo "email not found maybe you have to register first !";
+                // Mengecek apa password lebih dari 8 kata atau tidak
+                // Check whether the password is more than 8 words or not
+                if (strlen($password) < 8) {
+                        echo "password must be more than 8 words";
+                    } else {
+                        // Mengecek email
+                        // Checking email
+                        $sql = "SELECT * FROM users WHERE email='$email'";
+                        $result = $db->query($sql);
+                    
+                        if ($result->num_rows > 0) {
+                            $data = $result->fetch_assoc();
+                            // Mengecek username ada atau tidak
+                            // Check whether the username exists or not
+                            if ($data["username"] == $username) {
+                                // Mengecek password
+                                // Checking the password
+                                if (password_verify($password, $data["password"])) {
+                                    $_SESSION["username"] = $data["username"];
+                                    $_SESSION["email"] = $data["email"];    
+                                    header("Location: dashboard.php");
+                                    exit();
+                                } else {
+                                    echo "password incorrect";
+                                }
+                            }else{
+                                echo "username is wrong";
+                            }
+                        } else {
+                            echo "email not found maybe you have to register first !";
+                        }
+                    }
                 }
             }
         }
