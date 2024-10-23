@@ -127,7 +127,7 @@
         <div class="input-group">
             <input type="text" class="input" name="username" autocomplete="off" required>
             <label for="input">Username</label>
-          </div>
+            </div>
         </div>
         <div class="container">
         <div class="input-group">
@@ -150,36 +150,48 @@
             $username = $_POST['username']; // Mengambil Username // Get Username
             $email = $_POST['email']; // Mengambil Email // Get Email
             $password = $_POST['password']; // Mengambil Password // Get Password 
-
-            // Mengecek apakah password lebih dari 8 kata atau tidak 
-            // Check whether the password is more than 8 words or not
-            if (strlen($password) < 8) {
-                echo "password must be more than 8 words";
+            
+            // Mengecek jika username mengandung spasi
+            // Check if the username contains spaces
+            if (strpos($username, ' ') !== false) {
+                echo "username cannot contain spaces";
             } else {
-                // Menyamarkan password jika sudah lebih dari 8 kata (kenapa harus disamarkan? karena function password_verify di login hanya bekerja jika di samarkan (kayaknya)) 
-                // Disguise the password if it has more than 8 words (why does it have to be disguised? because the password_verify function at login only works if it is disguised (i guess))
-                $hash_password = password_hash($password, PASSWORD_BCRYPT);
-
-                // Cek jika nama atau email sudah ada atau belum
-                // Check if the name or email already exists or not
-                $check_sql = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
-                $result = $db->query($check_sql);
-
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    if (strtolower($row["username"]) == strtolower($username)) {
-                        echo "your name is already used";
-                    } elseif (strtolower($row["email"]) == strtolower($email)) {
-                        echo "your email is already used";
-                    }
+                // Mengecek jika password mengandung spasi
+                // Check if the password contains spaces
+                if (strpos($password, ' ') !== false) {
+                    echo "password cannot contain spaces";
                 } else {
-                    // Memasukan data ke database
-                    // Enter data into the database
-                    $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$hash_password', '$email')";
-                    if ($db->query($sql)) {
-                        echo '<p>register succeed , you can <a href="login.php" class="hehe">Login</a> now !</p>';
+                    // Mengecek apakah password lebih dari 8 karakter atau tidak 
+                    // Check whether the password is more than 8 characters or not
+                    if (strlen($password) < 8) {
+                        echo "password must be more than 8 characters";
                     } else {
-                        echo "register failed";
+                        // Menyamarkan password jika sudah lebih dari 8 karakter
+                        // Disguise the password if it has more than 8 characters
+                        $hash_password = password_hash($password, PASSWORD_BCRYPT);
+        
+                        // Cek jika nama atau email sudah ada atau belum
+                        // Check if the name or email already exists or not
+                        $check_sql = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
+                        $result = $db->query($check_sql);
+        
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            if (strtolower($row["username"]) == strtolower($username)) {
+                                echo "your name is already used";
+                            } elseif (strtolower($row["email"]) == strtolower($email)) {
+                                echo "your email is already used";
+                            }
+                        } else {
+                            // Memasukan data ke database
+                            // Enter data into the database
+                            $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$hash_password', '$email')";
+                            if ($db->query($sql)) {
+                                echo '<p>register succeed , you can <a href="login.php" class="hehe">Login</a> now !</p>';
+                            } else {
+                                echo "register failed";
+                            }
+                        }
                     }
                 }
             }
