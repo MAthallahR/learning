@@ -14,46 +14,11 @@
     <link rel="icon" href="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" type="image/gif" >
 </head>
 <style>
-    ::-webkit-scrollbar {
+    ::-webkit-scrollbar{
         display: none;
     }
     body{
         background-color: #303030;
-    }
-    .reset{
-        margin-left: 1700px;
-        margin-top: -50px;
-        text-decoration: none;
-    }
-    .reset{
-        animation: rainbow 14s infinite;
-    }
-
-    @keyframes rainbow {
-        0% {
-            color: red;
-        }
-        14.28% {
-            color: orange;
-        }
-        28.57% {
-            color: yellow;
-        }
-        42.86% {
-            color: green;
-        }
-        57.14% {
-            color: blue;
-        }
-        71.43% {
-            color: indigo;
-        }
-        85.71% {
-            color: violet;
-        }
-        100% {
-            color: red;
-        }
     }
     .link{
         display: inline-block;
@@ -82,38 +47,42 @@
         font-weight: bold;
         transform: scale(1, 0.90909);
     }   
-   .text{
-       color: #1269cc;
+    .text{
+        color: #1269cc;
        text-align: center;
    }
-   .username {
-        animation: color-change 10s infinite;
+   .username{
+       animation: rainbow 10s infinite;
     }
-
-    @keyframes color-change {
-        0% {
+    .reset{
+        margin-left: 1700px;
+        margin-top: -50px;
+        text-decoration: none;
+        animation: rainbow 14s infinite;
+    }
+    @keyframes rainbow{
+        0%{
             color: #8D3DB6;
         }
-        25% {
+        25%{
             color: #F23700;
         }
-        50% {
+        50%{
             color: #00C2F3;
         }
-        75% {
+        75%{
             color: #F1E900;
         }
-        100% {
+        100%{
             color: #D4000C;
         }
     }
-.gif {
-  transition: transform 0.2s;
-}
-
-.gif:hover {
-  transform: scale(clamp(1, 1.3, 2));
-}
+    .gif{
+    transition: transform 0.2s;
+    }
+    .gif:hover{
+    transform: scale(clamp(1, 1.3, 2));
+    }
 </style>
 <body>
     <div style="display: flex; flex-direction: column; align-items: center;">
@@ -138,7 +107,7 @@
     <img class="gif" src="https://media.tenor.com/ebZHNOszc00AAAAM/heiitse-cfc.gif" alt="" style="width: 400px;">
     <img class="gif" src="https://media.tenor.com/DtIErAZgFacAAAAM/this-person-is-km-near-your-house-persona-3.gif" alt="" style="width: 300px;">
     <img class="gif" src="https://media.tenor.com/ebf75sYVgFIAAAAM/cole-palmer.gif" alt="">
-    <img class="gif" src="https://media.tenor.com/tGLbL_wSmcwAAAAM/messi-lionel-messi.gif" alt="" style="width: 295px">
+    <img class="gif" src="https://media.tenor.com/tGLbL_wSmcwAAAAM/messi-lionel-messi.gif" alt="" style="width: 290px">
     <img class="gif" src="https://media.tenor.com/adh0KHMHiMwAAAAM/heiitse-cfc.gif" alt="">
     <img class="gif" src="https://media.tenor.com/4ACavD3iMIsAAAAM/rmcf-real-madrid.gif" alt="">
     <img class="gif" src="https://media.tenor.com/JfmcqUCNJmAAAAAM/persona-persona3.gif" alt="">
@@ -152,5 +121,11 @@
         <br>
         <br>
     <a href="logout.php" class="link"><div class="kotak"><p class="text">LOGOUT</p></div></a>
+    <audio autoplay loop id="music">
+        <source src="Heaven - Persona 4.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        audioElement.play();
+    </script>
 </body>
 </html>
