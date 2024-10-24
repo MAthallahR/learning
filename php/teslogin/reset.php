@@ -22,7 +22,7 @@
         align-items: center;
         padding: 20px;
         border-radius: 5px;
-        height: 400px;
+        height: 420px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -118,6 +118,12 @@
             color: red;
         }
     }
+    .succeed{
+        color: green;
+    }
+    .error{
+        color: red;
+    }
 </style>
 <body>
     <form action="reset.php" method="post">
@@ -141,7 +147,6 @@
             </div>
         </div>
         <input type="submit" value="Reset" name="reset" class="reset"> 
-        <p>want to making sure? you can <a href="login.php" class="hehe">Login</a> again</p>
         <br>
         <?php
         include("service/database.php");
@@ -155,11 +160,11 @@
             // Mengecek apa password lebih dari 8 kata atau tidak
             // Check whether the password is more than 8 words or not
             if (strlen($new_password) < 8) {
-                echo "Password must be more than 8 characters.";
+                echo '<span class="error">password must be more than 8 characters</span>';
             } else {
 
-                // Mengecek email dan password lama
-                // Checking email and old password
+                // Mengecek email dan password lama di database
+                // Checking email and old password in databse
                 $sql = "SELECT * FROM users WHERE email = ?";
                 $result = $db->prepare($sql);
                 $result->bind_param("s", $email);
@@ -167,7 +172,7 @@
                 $getresult = $result->get_result();
 
                 if ($getresult->num_rows == 0) {
-                    echo "account not found maybe you have to remember it first !";;
+                    echo '<span class="error">account not found maybe you have to remember it first !</span>';
                 } else {
                     $data = $getresult->fetch_assoc();
 
@@ -178,7 +183,7 @@
                         // Mengecek apakah password baru sama dengan password lama
                         // Check if the new password is the same as the old password
                         if (strtolower($old_password) === strtolower($new_password)) {
-                            echo "The new password cannot be the same as the old one";
+                            echo '<span class="error">the new password cannot be the same as the old one</span>';
                         } else {
 
                             // Hash password baru
@@ -195,19 +200,23 @@
                             // Mengecek apakah perubahan password berhasil
                             // Check if the update was successful
                             if ($update_result->affected_rows > 0) {
-                                echo "password reset success";
+                                echo '<span class="succeed">password reset success</span>';
                             } else {
-                                echo "reset new password error";
+                                echo '<span class="error">reset new password error</span>';
                             }
                         }
                     } else {
-                        echo "old password incorrect";
+                        echo '<span class="error">old password incorrect</span>';
                     }
                 }
             }
         }
         ?>
+        <p>want to making sure? you can <a href="login.php" class="hehe">Login</a> again</p>
+        <p>or you can go <a href="dashboard.php" class="hehe">back</a></p>
         <script>
+        // Script agar saat input ada valuenya stay di atas
+        // Script to make the label stay above when input has value
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
