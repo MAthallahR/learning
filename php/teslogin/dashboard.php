@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if (!isset($_SESSION['username'])) {
+    if (!isset($_SESSION['profile_name'])) {
         header("Location: login.php");
         exit();
     }
@@ -21,25 +21,38 @@
         background-color: #303030;
     }
     .link{
-        display: inline-block;
-        pointer-events: none;
         text-decoration: none;
-        display: flex;
-        justify-content: center;
-        align-items: center; 
+        width: 100%;
+        display: inline-block;
+        pointer-events: none; 
     }    
     .kotak{
         background-color: #51eefc;
         height: 75px;
         width: 550px;
         margin: 20px auto;
+        border-radius: 5px;
+        justify-content: center;
         align-content: center;
+        transition: all 0.3s;
         pointer-events: auto;
     }
     .kotak:hover{
         background: #1269cc;
-        transition: all 0.3s;
         transform: scale(1, 1.1);
+        box-shadow: 0 0 5px #51eefc, 0 0 10px #51eefc; 
+        animation: w 1.5s infinite;
+    }
+    @keyframes w {
+        0% {
+            box-shadow: 0 0 5px #51eefc;
+        }
+        50% {
+            box-shadow: 0 0 10px #51eefc;
+        }
+        100% {
+            box-shadow: 0 0 5px #51eefc;
+        }
     }
     .kotak:hover .text{
         color: 	#51eefc;
@@ -49,14 +62,24 @@
     }   
     .text{
         color: #1269cc;
-       text-align: center;
+        text-align: center;
+        transition: color 0.3s;
    }
    .username{
        animation: rainbow 10s infinite;
     }
-    .reset{
-        margin-left: 1700px;
+    .resetlist{
+        list-style-type: none; 
+        padding: 0;            
+        margin: 0;             
+        display: flex;
+        margin-left: 1550px;
         margin-top: -50px;
+    }
+    .resetlist li{
+        padding-left: 50px;
+    }
+    .reset{
         text-decoration: none;
         animation: rainbow 14s infinite;
     }
@@ -85,14 +108,17 @@
     }
 </style>
 <body>
-    <div style="display: flex; flex-direction: column; align-items: center;">
+    <header>
         <h1 align="center" class="judul">
             <img src="https://media.tenor.com/sz7KS3CUyfsAAAAi/chie-satonaka.gif" height="50" width="50"> 
-            Hi <span class="username"><?php echo ucfirst($_SESSION['username']); ?></span> 
+            Hi <span class="username"><?php echo ucfirst($_SESSION['profile_name']); ?></span> 
             <img src="https://media.tenor.com/ax1MmuY9BYMAAAAi/vibing-aigis.gif" height="50" width="50">
         </h1>
-        <a href="reset.php" class="reset">reset password</a>
-    </div>
+        <ul class="resetlist">
+            <li><a href="changeprofilename.php" class="reset">change profile name</a></li>
+            <li><a href="reset.php" class="reset">reset password</a></li>
+        </ul>
+    </header>
     <img class="gif" src="https://media.tenor.com/rNhsfkZgcK0AAAAj/chelsea-fc-sports.gif" alt="" style="width: 250px;">
     <img class="gif" src="https://media.tenor.com/0MpGA0coe_AAAAAM/kotone-shiomi-kotone.gif" alt="">
     <img class="gif" src="https://media.tenor.com/bvqgIKH-u_sAAAAM/cole-palmer-cole-jermaine-palmer.gif" alt="">
@@ -100,7 +126,7 @@
     <img class="gif" src="https://media.tenor.com/OGfubOfqAfUAAAAM/mitsuru-kirijo-persona.gif" alt="">
     <img class="gif" src="https://media.tenor.com/LqwGVt4iWQAAAAAM/cole-palmer-cole-palmer-akgae.gif" alt="">
     <img class="gif" src="https://media.tenor.com/BImgTICf9XwAAAAM/nicolas-jackson.gif" alt="" style="width: 300px;">
-    <img class="gif" src="https://media.tenor.com/8TmA66FvtNsAAAAM/ngolo-kante-haftal%C4%B1k-kesif.gif" alt="">
+    <img class="gif" src="https://media.tenor.com/8TmA66FvtNsAAAAM/ngolo-kante-haftal%C4%B1k-kesif.gif" alt="" style="width: 280px;">
     <img class="gif" src="https://media.tenor.com/OUKo4jVsshgAAAAM/persona-4-persona.gif" alt="">
     <img class="gif" src="https://media.tenor.com/tOv2k6Pc2i0AAAAM/takina-chelsea.gif" alt="" >
     <img class="gif" src="https://media.tenor.com/LHxlr924whQAAAAM/adachi-true.gif" alt="">
