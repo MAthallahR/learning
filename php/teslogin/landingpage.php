@@ -51,29 +51,28 @@
             background: #1269cc;
             transform: scale(1.05);
             box-shadow: 0 0 5px #51eefc, 0 0 10px #51eefc; 
-            animation: w 1s infinite;
+            animation: w 1.5s infinite;
         }
         @keyframes w {
             0% {
-                text-shadow: 0 0 10px rgb(32, 32, 255);
+                box-shadow: 0 0 10px #51eefc;
             }
             50% {
-                text-shadow: 0 0 20px rgb(32, 32, 255);
+                box-shadow: 0 0 20px #51eefc;
             }
             100% {
-                text-shadow: 0 0 10px rgb(32, 32, 255);
+                box-shadow: 0 0 10px #51eefc;
             }
         }
-        
+        .kotak:hover .ltex{
+            color: #51eefc;
+        }
         .ltex{
             color: #1269cc;
             font-size: 20px;
             font-weight: bold;
             text-align: center;
             transition: color 0.3s;
-        }
-        .kotak:hover .ltex{
-            color: #51eefc;
         }
         h1{
             text-align: center;
