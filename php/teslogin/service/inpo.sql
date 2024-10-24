@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 18, 2024 at 02:04 PM
+-- Generation Time: Oct 24, 2024 at 04:06 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
+  `profile_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `username` varchar(36) NOT NULL,
   `email` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
@@ -39,8 +40,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_on`) VALUES
-(2, 'lutung', 'lutungganteng@gmail.com', '$2y$10$cl5Kim1E..5SGJWQuJEP0Owlwnkz/s3fMwG74B7Y5Fjf3QSQSZKSS', '2024-10-18 07:14:57');
+INSERT INTO `users` (`id`, `profile_name`, `username`, `email`, `password`, `created_on`) VALUES
+(1, 'cole palmer', 'colepalmer', 'colepalmer@gmail.com', '$2y$10$SXkp23bdiBGQ6r/y2.qM4.W008SntRRFyXT8AddhPvPJb6iTDH8hq', '2024-10-24 16:02:16');
 
 --
 -- Indexes for dumped tables
@@ -62,7 +63,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
