@@ -118,6 +118,9 @@
             color: red;
         }
     }
+    .error{
+        color: red;
+    }
 </style>
 <body>
     <form action="login.php" method="post">
@@ -154,17 +157,17 @@
              // Mengecek jika username mengandung spasi
             // Check if the username contains spaces
             if (strpos($username, ' ') !== false) {
-                echo "username cannot contain spaces";
+                echo '<span class="error">username cannot contain spaces</span>';
             } else {
                 // Mengecek jika password mengandung spasi
                 // Check if the password contains spaces
                 if (strpos($password, ' ') !== false) {
-                    echo "password cannot contain spaces";
+                    echo '<span class="error">password cannot contain spaces</span>';
                 } else {
                 // Mengecek apa password lebih dari 8 kata atau tidak
                 // Check whether the password is more than 8 words or not
                 if (strlen($password) < 8) {
-                        echo "password must be more than 8 words";
+                        echo '<span class="error">password must be more than 8 words</span>';
                     } else {
                         // Mengecek email
                         // Checking email
@@ -180,17 +183,18 @@
                                 // Checking the password
                                 if (password_verify($password, $data["password"])) {
                                     $_SESSION["username"] = $data["username"];
+                                    $_SESSION["profile_name"] = $data["profile_name"]; 
                                     $_SESSION["email"] = $data["email"];    
                                     header("Location: dashboard.php");
                                     exit();
                                 } else {
-                                    echo "password incorrect";
+                                    echo '<span class="error">password incorrect</span>';
                                 }
                             }else{
-                                echo "username is wrong";
+                                echo '<span class="error">username is wrong</span>';
                             }
                         } else {
-                            echo "email not found maybe you have to register first !";
+                            echo '<span class="error">email not found maybe you have to register first !</span>';
                         }
                     }
                 }
@@ -198,6 +202,8 @@
         }
         ?>
         <script>
+        // Script agar saat input ada valuenya stay di atas
+        // Script to make the label stay above when input has value
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
