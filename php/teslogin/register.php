@@ -22,7 +22,7 @@
         align-items: center;
         padding: 20px;
         border-radius: 5px;
-        height: 400px;
+        height: 450px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -119,10 +119,22 @@
             color: red;
         }
     }
+    .succeed{
+        color: green;
+    }
+    .error{
+        color: red;
+    }
 </style>
 <body>
     <form action="register.php" method="post">
         <h1>REGISTER</h1>
+        <div class="container">
+        <div class="input-group">
+            <input type="text" class="input" name="profilename" autocomplete="off" required>
+            <label for="input">Profile Name</label>
+        </div>
+        </div>
         <div class="container">
         <div class="input-group">
             <input type="text" class="input" name="username" autocomplete="off" required>
@@ -147,6 +159,7 @@
         include("service/database.php");
         
         if(isset($_POST['register'])){
+            $profilename = $_POST['profilename']; // Mengambil Profile Name // Get Profile Name
             $username = $_POST['username']; // Mengambil Username // Get Username
             $email = $_POST['email']; // Mengambil Email // Get Email
             $password = $_POST['password']; // Mengambil Password // Get Password 
@@ -154,17 +167,17 @@
             // Mengecek jika username mengandung spasi
             // Check if the username contains spaces
             if (strpos($username, ' ') !== false) {
-                echo "username cannot contain spaces";
+                echo '<span class="error">username cannot contain spaces</span>';
             } else {
                 // Mengecek jika password mengandung spasi
                 // Check if the password contains spaces
                 if (strpos($password, ' ') !== false) {
-                    echo "password cannot contain spaces";
+                    echo '<span class="error">password cannot contain spaces</span>';
                 } else {
                     // Mengecek apakah password lebih dari 8 karakter atau tidak 
                     // Check whether the password is more than 8 characters or not
                     if (strlen($password) < 8) {
-                        echo "password must be more than 8 characters";
+                        echo '<span class="error">password must be more than 8 characters</span';
                     } else {
                         // Menyamarkan password jika sudah lebih dari 8 karakter
                         // Disguise the password if it has more than 8 characters
@@ -178,18 +191,18 @@
                         if ($result->num_rows > 0) {
                             $row = $result->fetch_assoc();
                             if (strtolower($row["username"]) == strtolower($username)) {
-                                echo "your name is already used";
+                                echo '<span class="error">your name is already used</span>';
                             } elseif (strtolower($row["email"]) == strtolower($email)) {
-                                echo "your email is already used";
+                                echo '<span class="error">your email is already used</span>';
                             }
                         } else {
                             // Memasukan data ke database
                             // Enter data into the database
-                            $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$hash_password', '$email')";
+                            $sql = "INSERT INTO users (username, profile_name, password, email) VALUES ('$username', '$profilename', '$hash_password', '$email')";
                             if ($db->query($sql)) {
-                                echo '<p>register succeed , you can <a href="login.php" class="hehe">Login</a> now !</p>';
+                                echo '<span class="succeed">register succeed , you can <a href="login.php" class="hehe">Login</a> now !</span>';
                             } else {
-                                echo "register failed";
+                                echo '<span class="error">register failed</span>';
                             }
                         }
                     }
@@ -198,6 +211,8 @@
         }
         ?>
         <script>
+        // Script agar saat input ada valuenya labelnya stay di atas
+        // Script to make the label stay above when input has value
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
