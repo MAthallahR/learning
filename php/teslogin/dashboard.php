@@ -1,9 +1,9 @@
 <?php 
-    session_start();
-    if (!isset($_SESSION['profile_name'])) {
-        header("Location: login.php");
-        exit();
-    }
+session_start();
+if (!isset($_SESSION['profile_name'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,15 +43,15 @@
         box-shadow: 0 0 5px #51eefc, 0 0 10px #51eefc; 
         animation: w 1.5s infinite;
     }
-    @keyframes w {
-        0% {
-            box-shadow: 0 0 5px #51eefc;
-        }
-        50% {
+        @keyframes w{
+        0%{
             box-shadow: 0 0 10px #51eefc;
         }
-        100% {
-            box-shadow: 0 0 5px #51eefc;
+        50%{
+            box-shadow: 0 0 20px #51eefc;
+        }
+        100%{
+            box-shadow: 0 0 10px #51eefc;
         }
     }
     .kotak:hover .text{
@@ -143,9 +143,9 @@
     <img class="gif" src="https://media.tenor.com/s45HmDEGbUsAAAAj/3d-monkey-monkey-eating.gif" alt="" style="width: 300px;">
     <img class="gif" src="https://media.tenor.com/yToZSCyViUQAAAAM/kasumi-persona5.gif" alt="">
     <img class="gif" src="https://media.tenor.com/va0pIiO-yk4AAAAM/cole-cole-palmer.gif" alt="" style="width: 300px; display: block; margin: 0 auto;">
-        <br>
-        <br>
-        <br>
+    <br>
+    <br>
+    <br>
     <a href="logout.php" class="link"><div class="kotak"><p class="text">LOGOUT</p></div></a>
     <audio autoplay loop id="music">
         <source src="Heaven - Persona 4.mp3" type="audio/mpeg">
