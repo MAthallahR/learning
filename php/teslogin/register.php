@@ -97,25 +97,25 @@
         text-decoration: none;
     }
     @keyframes rainbow{
-        0% {
+        0%{
             color: red;
         }
-        15% {
+        15%{
             color: orange;
         }
-        30% {
+        30%{
             color: yellow;
         }
-        45% {
+        45%{
             color: green;
         }
-        60% {
+        60%{
             color: blue;
         }
-        75% {
+        75%{
             color: violet;
         }
-        100% {
+        100%{
             color: red;
         }
     }
@@ -157,7 +157,6 @@
         <p>already have an account? <a href="login.php" class="hehe">Login</a></p>
         <?php
         include("service/database.php");
-        
         if(isset($_POST['register'])){
             $profilename = $_POST['profilename']; // Mengambil Profile Name // Get Profile Name
             $username = $_POST['username']; // Mengambil Username // Get Username
@@ -166,19 +165,31 @@
             
             // Mengecek jika username mengandung spasi
             // Check if the username contains spaces
-            if (strpos($username, ' ') !== false) {
+            if(strpos($username, ' ') !== false){
                 echo '<span class="error">username cannot contain spaces</span>';
-            } else {
+
+            // Mengecek jika username mengandung karakter ilegal/symbol
+            // Check if the username contains illegal characters/symbols
+            }elseif(preg_match('/[!@#$%^&*()+=<>?{}[\]\\|;:\'",]/', $username)){
+                echo '<span class="error">username cannot contain illegal characters</span>';
+            }else{
                 // Mengecek jika password mengandung spasi
                 // Check if the password contains spaces
-                if (strpos($password, ' ') !== false) {
+                if(strpos($password, ' ') !== false){
                     echo '<span class="error">password cannot contain spaces</span>';
-                } else {
+
+                // Mengecek jika password mengandung karakter ilegal/symbol
+                // Check if the password contains illegal characters/symbols
+                }elseif(preg_match('/[!@#$%^&*()+=<>?{}[\]\\|;:\'",]/', $password)){
+                    echo '<span class="error">password cannot contain illegal characters</span>';
+                }else{
+
                     // Mengecek apakah password lebih dari 8 karakter atau tidak 
                     // Check whether the password is more than 8 characters or not
-                    if (strlen($password) < 8) {
-                        echo '<span class="error">password must be more than 8 characters</span';
-                    } else {
+                    if(strlen($password) < 8){
+                        echo '<span class="error">password must be more than 8 characters</span>';
+                    }else{
+
                         // Menyamarkan password jika sudah lebih dari 8 karakter
                         // Disguise the password if it has more than 8 characters
                         $hash_password = password_hash($password, PASSWORD_BCRYPT);
@@ -188,20 +199,20 @@
                         $check_sql = "SELECT * FROM users WHERE username = '$username' OR email = '$email'";
                         $result = $db->query($check_sql);
         
-                        if ($result->num_rows > 0) {
+                        if($result->num_rows > 0){
                             $row = $result->fetch_assoc();
-                            if (strtolower($row["username"]) == strtolower($username)) {
+                            if(strtolower($row["username"]) == strtolower($username)){
                                 echo '<span class="error">your name is already used</span>';
-                            } elseif (strtolower($row["email"]) == strtolower($email)) {
+                            }elseif(strtolower($row["email"]) == strtolower($email)){
                                 echo '<span class="error">your email is already used</span>';
                             }
-                        } else {
+                        }else{
                             // Memasukan data ke database
                             // Enter data into the database
                             $sql = "INSERT INTO users (username, profile_name, password, email) VALUES ('$username', '$profilename', '$hash_password', '$email')";
-                            if ($db->query($sql)) {
+                            if($db->query($sql)){
                                 echo '<span class="succeed">register succeed , you can <a href="login.php" class="hehe">Login</a> now !</span>';
-                            } else {
+                            }else{
                                 echo '<span class="error">register failed</span>';
                             }
                         }
@@ -216,9 +227,9 @@
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
-            if (inputField.value.trim() !== '') {
+            if(inputField.value.trim() !== '') {
               inputField.classList.add('has-value');
-            } else {
+            }else{
                   inputField.classList.remove('has-value');
             }
           });
