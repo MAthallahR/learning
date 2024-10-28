@@ -96,25 +96,25 @@
         text-decoration: none;
     }
     @keyframes rainbow{
-        0% {
+        0%{
             color: red;
         }
-        15% {
+        15%{
             color: orange;
         }
-        30% {
+        30%{
             color: yellow;
         }
-        45% {
+        45%{
             color: green;
         }
-        60% {
+        60%{
             color: blue;
         }
-        75% {
+        75%{
             color: violet;
         }
-        100% {
+        100%{
             color: red;
         }
     }
@@ -148,52 +148,56 @@
         <?php
         include("service/database.php");
         session_start();
-
-        if (isset($_POST['login'])) {
+        if(isset($_POST['login'])){
             $username = $_POST['username']; // Mengambil Username // Get Username
             $email = $_POST['email']; // Mengambil Email // Get Email
             $password = $_POST['password']; // Mengambil Password // Get Password
 
-             // Mengecek jika username mengandung spasi
+            // Mengecek jika username mengandung spasi
             // Check if the username contains spaces
-            if (strpos($username, ' ') !== false) {
+            if(strpos($username, ' ') !== false){
                 echo '<span class="error">username cannot contain spaces</span>';
-            } else {
+
+            // Mengecek jika name mengandung karakter ilegal/symbol
+            // Check if the name contains illegal characters/symbols
+            }elseif(preg_match('/[!@#$%^&*()+=<>?{}[\]\\|;:\'",]/', $username)){
+                echo '<span class="error">username cannot contain illegal characters</span>';
+            }else{
                 // Mengecek jika password mengandung spasi
                 // Check if the password contains spaces
-                if (strpos($password, ' ') !== false) {
+                if(strpos($password, ' ') !== false){
                     echo '<span class="error">password cannot contain spaces</span>';
-                } else {
+                }else{
                 // Mengecek apa password lebih dari 8 kata atau tidak
                 // Check whether the password is more than 8 words or not
-                if (strlen($password) < 8) {
+                if(strlen($password) < 8){
                         echo '<span class="error">password must be more than 8 words</span>';
-                    } else {
+                    }else{
                         // Mengecek email
                         // Checking email
                         $sql = "SELECT * FROM users WHERE email='$email'";
                         $result = $db->query($sql);
                     
-                        if ($result->num_rows > 0) {
+                        if($result->num_rows > 0) {
                             $data = $result->fetch_assoc();
                             // Mengecek username ada atau tidak
                             // Check whether the username exists or not
-                            if ($data["username"] == $username) {
+                            if($data["username"] == $username){
                                 // Mengecek password
                                 // Checking the password
-                                if (password_verify($password, $data["password"])) {
+                                if(password_verify($password, $data["password"])){
                                     $_SESSION["username"] = $data["username"];
                                     $_SESSION["profile_name"] = $data["profile_name"]; 
                                     $_SESSION["email"] = $data["email"];    
                                     header("Location: dashboard.php");
                                     exit();
-                                } else {
+                                }else{
                                     echo '<span class="error">password incorrect</span>';
                                 }
                             }else{
                                 echo '<span class="error">username is wrong</span>';
                             }
-                        } else {
+                        }else{
                             echo '<span class="error">email not found maybe you have to register first !</span>';
                         }
                     }
@@ -207,9 +211,9 @@
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
-            if (inputField.value.trim() !== '') {
+            if(inputField.value.trim() !== '') {
               inputField.classList.add('has-value');
-            } else {
+            }else{
                   inputField.classList.remove('has-value');
             }
           });
