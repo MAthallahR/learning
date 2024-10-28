@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +35,7 @@
         justify-content: center;
         align-items: center;
     }
-    .input {
+    .input{
         width: 300px;
         height: 30px;
         font-size: 16px;
@@ -96,25 +99,25 @@
         text-decoration: none;
     }
     @keyframes rainbow{
-        0% {
+        0%{
             color: red;
         }
-        15% {
+        15%{
             color: orange;
         }
-        30% {
+        30%{
             color: yellow;
         }
-        45% {
+        45%{
             color: green;
         }
-        60% {
+        60%{
             color: blue;
         }
-        75% {
+        75%{
             color: violet;
         }
-        100% {
+        100%{
             color: red;
         }
     }
@@ -130,7 +133,7 @@
         <h1>RESET PASSWORD</h1>
         <div class="container">
             <div class="input-group">
-                <input type="email" class="input" name="email" autocomplete="off" required>
+                <input type="email" class="input <?= isset($_SESSION['email']) ? 'has-value' : ''; ?>" name="email" value="<?= $_SESSION['email']; ?>" autocomplete="off" required>                
                 <label for="input">Email</label>
             </div>
         </div>
@@ -150,63 +153,71 @@
         <br>
         <?php
         include("service/database.php");
-        session_start();
-
-        if (isset($_POST['reset'])) {
+        if(isset($_POST['reset'])){
             $email = $_POST['email']; // Mengambil Email // Get Email
             $old_password = $_POST['old_password']; // Mengambil Password Lama // Get Old Password
             $new_password = $_POST['new_password']; // Mengambil Password Baru // Get New Password
 
-            // Mengecek apa password lebih dari 8 kata atau tidak
-            // Check whether the password is more than 8 words or not
-            if (strlen($new_password) < 8) {
-                echo '<span class="error">password must be more than 8 characters</span>';
-            } else {
+            // Mengecek jika password mengandung spasi
+            // Check if the password contains spaces
+            if(strpos($new_password, ' ') !== false){
+                echo '<span class="error">password cannot contain spaces</span>';
+                
+            // Mengecek jika password mengandung karakter ilegal/symbol
+            // Check if the password contains illegal characters/symbols
+            }elseif(preg_match('/[!@#$%^&*()+=<>?{}[\]\\|;:\'",]/', $new_password)){
+                echo '<span class="error">password cannot contain illegal characters</span>';
+            }else{
 
-                // Mengecek email dan password lama di database
-                // Checking email and old password in databse
-                $sql = "SELECT * FROM users WHERE email = ?";
-                $result = $db->prepare($sql);
-                $result->bind_param("s", $email);
-                $result->execute();
-                $getresult = $result->get_result();
+                // Mengecek apa password lebih dari 8 kata atau tidak
+                // Check whether the password is more than 8 words or not
+                if (strlen($new_password) < 8){
+                    echo '<span class="error">password must be more than 8 characters</span>';
+                }else{
 
-                if ($getresult->num_rows == 0) {
-                    echo '<span class="error">account not found maybe you have to remember it first !</span>';
-                } else {
-                    $data = $getresult->fetch_assoc();
+                    // Mengecek email dan password lama di database
+                    // Checking email and old password in databse
+                    $sql = "SELECT * FROM users WHERE email = '$email'";
+                    $result = $db->prepare($sql);
+                    $result->execute();
+                    $getresult = $result->get_result();
 
-                    // Mengecek apakah password lama cocok
-                    // Check if the old password matches
-                    if (password_verify(($old_password), $data['password'])) {
+                    if ($getresult->num_rows == 0){
+                        echo '<span class="error">account not found maybe you have to remember it first !</span>';
+                    }else{
+                        $data = $getresult->fetch_assoc();
 
-                        // Mengecek apakah password baru sama dengan password lama
-                        // Check if the new password is the same as the old password
-                        if (strtolower($old_password) === strtolower($new_password)) {
-                            echo '<span class="error">the new password cannot be the same as the old one</span>';
-                        } else {
+                        // Mengecek apakah password lama cocok
+                        // Check if the old password matches
+                        if(password_verify(($old_password), $data['password'])){
 
-                            // Hash password baru
-                            // Hash the new password
-                            $new_hash_password = password_hash($new_password, PASSWORD_DEFAULT);
-                            
-                            // Update password baru di database
-                            // Update the new password in the database
-                            $update_sql = "UPDATE users SET password = ? WHERE email = ?";
-                            $update_result = $db->prepare($update_sql);
-                            $update_result->bind_param("ss", $new_hash_password, $email);
-                            $update_result->execute();
-                    
-                            // Mengecek apakah perubahan password berhasil
-                            // Check if the update was successful
-                            if ($update_result->affected_rows > 0) {
-                                echo '<span class="succeed">password reset success</span>';
-                            } else {
-                                echo '<span class="error">reset new password error</span>';
+                            // Mengecek apakah password baru sama dengan password lama
+                            // Check if the new password is the same as the old password
+                            if(strtolower($old_password) === strtolower($new_password)){
+                                echo '<span class="error">the new password cannot be the same as the old one</span>';
+                            }else{
+
+                                // Menyamarkan password baru
+                                // Disguise the new password
+                                $new_hash_password = password_hash($new_password, PASSWORD_DEFAULT);
+                                
+                                // Update password baru di database
+                                // Update the new password in the database
+                                $update_sql = "UPDATE users SET password = '$new_hash_password' WHERE email = '$email'";
+                                $update_result = $db->prepare($update_sql);
+                                $update_result->execute();
+                        
+                                // Mengecek apakah perubahan password berhasil
+                                // Check if the update was successful
+                                if($update_result->affected_rows > 0){
+                                    echo '<span class="succeed">password reset success</span>';
+                                }else{
+                                    echo '<span class="error">reset new password error</span>';
+                                }
                             }
+                        }else{
+                            echo '<span class="error">old password incorrect</span>';
                         }
-                    } else {
-                        echo '<span class="error">old password incorrect</span>';
                     }
                 }
             }
@@ -220,9 +231,9 @@
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
-            if (inputField.value.trim() !== '') {
+            if(inputField.value.trim() !== '') {
               inputField.classList.add('has-value');
-            } else {
+            }else{
                   inputField.classList.remove('has-value');
             }
           });
