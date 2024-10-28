@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +35,7 @@
         justify-content: center;
         align-items: center;
     }
-    .input {
+    .input{
         width: 300px;
         height: 30px;
         font-size: 16px;
@@ -96,25 +99,25 @@
         text-decoration: none;
     }
     @keyframes rainbow{
-        0% {
+        0%{
             color: red;
         }
-        15% {
+        15%{
             color: orange;
         }
-        30% {
+        30%{
             color: yellow;
         }
-        45% {
+        45%{
             color: green;
         }
-        60% {
+        60%{
             color: blue;
         }
-        75% {
+        75%{
             color: violet;
         }
-        100% {
+        100%{
             color: red;
         }
     }
@@ -128,6 +131,7 @@
 <body>
     <form action="changeprofilename.php" method="post">
         <h1>Change Profile Name</h1>
+        <p style="margin-top: -10px;"> Your Profile Name Right Now : <?= $_SESSION['profile_name'] ?></p>
         <div class="container">
             <div class="input-group">
                 <input type="text" class="input" name="new_name" autocomplete="off" required>
@@ -138,9 +142,7 @@
         <br>
         <?php
         include("service/database.php");
-        session_start();
-
-        if (isset($_POST['change'])) {
+        if(isset($_POST['change'])){
             $new_name = $_POST['new_name']; // Mengambil Nama Baru // Get New Name
 
             // Mengecek nama profile di database
@@ -151,7 +153,7 @@
             
             // Mengecek apakah nama baru sama dengan password lama
             // Check if the new name is the same as the old name
-            if (strtolower($_SESSION['profile_name']) === strtolower($new_name)) {
+            if(strtolower($_SESSION['profile_name']) === strtolower($new_name)){
                 echo '<span class="error">the name cannot be the same as the old one</span>';
             }else{
 
@@ -163,7 +165,7 @@
 
                 // Mengecek apakah perubahan nama berhasil
                 // Check if the update was successful
-                if ($update_result->affected_rows > 0) {
+                if($update_result->affected_rows > 0){
                     echo '<span class="succeed">profile name changed successfully</span>';
                     $_SESSION['profile_name'] = $new_name;
                 }else{
@@ -179,9 +181,9 @@
         const inputFields = document.querySelectorAll('.input-group input');
         inputFields.forEach(inputField => {
           inputField.addEventListener('input', () => {
-            if (inputField.value.trim() !== '') {
+            if(inputField.value.trim() !== '') {
               inputField.classList.add('has-value');
-            } else {
+            }else{
                   inputField.classList.remove('has-value');
             }
           });
