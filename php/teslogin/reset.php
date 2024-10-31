@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['profile_name'])) {
+    header("Location: login.php");
+    exit();
 ?>
 <!DOCTYPE html>
 <html lang="en">
