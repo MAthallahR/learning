@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if (!isset($_SESSION['profile_name'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 ?>
@@ -54,17 +54,18 @@ if (!isset($_SESSION['profile_name'])) {
             box-shadow: 0 0 10px #51eefc;
         }
     }
-    .kotak:hover .text{
-        color: 	#51eefc;
-        transition: all 0.3s;
-        font-weight: bold;
-        transform: scale(1, 0.90909);
-    }   
     .text{
         color: #1269cc;
+        font-size: large;
         text-align: center;
         transition: color 0.3s;
-   }
+    }
+    .kotak:hover .text{
+        font-family: bold;
+        color: 	#51eefc;
+        transition: all 0.3s;
+        transform: scale(1, 0.90909);
+    }   
    .username{
        animation: rainbow 10s infinite;
     }
@@ -73,7 +74,7 @@ if (!isset($_SESSION['profile_name'])) {
         padding: 0;            
         margin: 0;             
         display: flex;
-        margin-left: 1550px;
+        margin-left: 1400px;
         margin-top: -50px;
     }
     .resetlist li{
@@ -109,7 +110,7 @@ if (!isset($_SESSION['profile_name'])) {
 </style>
 <body>
     <header>
-        <h1 align="center" class="judul">
+        <h1 align="center" class="judul" style="font-family: Arial, sans-serif;">
             <img src="https://media.tenor.com/sz7KS3CUyfsAAAAi/chie-satonaka.gif" height="50" width="50"> 
             Hi <span class="username"><?php echo ucfirst($_SESSION['profile_name']); ?></span> 
             <img src="https://media.tenor.com/ax1MmuY9BYMAAAAi/vibing-aigis.gif" height="50" width="50">
@@ -117,6 +118,8 @@ if (!isset($_SESSION['profile_name'])) {
         <ul class="resetlist">
             <li><a href="changeprofilename.php" class="reset">change profile name</a></li>
             <li><a href="reset.php" class="reset">reset password</a></li>
+            <li><a href="delete.php" class="reset">delete account</a></li>
+
         </ul>
     </header>
     <img class="gif" src="https://media.tenor.com/rNhsfkZgcK0AAAAj/chelsea-fc-sports.gif" alt="" style="width: 250px;">
