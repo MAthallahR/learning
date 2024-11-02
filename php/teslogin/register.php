@@ -25,6 +25,10 @@
         height: 450px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    form:hover{
+        transform: scale(1.02);
     }
     .container{
         width: 100%;
@@ -128,7 +132,7 @@
 </style>
 <body>
     <form action="register.php" method="post">
-        <h1>REGISTER</h1>
+        <h1 style="font-family: Arial, sans-serif;">REGISTER</h1>
         <div class="container">
         <div class="input-group">
             <input type="text" class="input" name="profilename" autocomplete="off" required>
@@ -157,6 +161,7 @@
         <p>already have an account? <a href="login.php" class="hehe">Login</a></p>
         <?php
         include("service/database.php");
+
         if(isset($_POST['register'])){
             $profilename = $_POST['profilename']; // Mengambil Profile Name // Get Profile Name
             $username = $_POST['username']; // Mengambil Username // Get Username
