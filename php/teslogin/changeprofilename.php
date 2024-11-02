@@ -1,8 +1,9 @@
 <?php 
 session_start();
 if (!isset($_SESSION['profile_name'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +32,10 @@ if (!isset($_SESSION['profile_name'])) {
         height: 265px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    form:hover{
+        transform: scale(1.02);
     }
     .container{
         width: 100%;
@@ -89,13 +94,12 @@ if (!isset($_SESSION['profile_name'])) {
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.5s, font-size 0.5s;
+        transition: all 0.1s;
         width: 150px; 
     }
     .change:hover{
         background-color: #3e8e41;
-        font-size: larger;
-        transition: font-size .5s;
+        transform: translateY(-2px);
     }
     .hehe{
         animation: rainbow 14s infinite;
@@ -133,7 +137,7 @@ if (!isset($_SESSION['profile_name'])) {
 </style>
 <body>
     <form action="changeprofilename.php" method="post">
-        <h1>Change Profile Name</h1>
+        <h1 style="font-family: Arial, sans-serif;">CHANGE PROFILE NAME</h1>
         <p style="margin-top: -10px;"> Your Profile Name Right Now : <?= $_SESSION['profile_name'] ?></p>
         <div class="container">
             <div class="input-group">
