@@ -86,7 +86,7 @@
 </style>
 <body>
     <div class="container">
-        <h1 style="color: black;">
+        <h1 style="color: black; font-family: Arial, sans-serif;">
             <img src="https://media1.tenor.com/m/VHsiL8B8P0wAAAAC/shincore-wave-emoji.gif" height="30" width="50"> 
             Hi There! Please Select 
             <img src="https://media1.tenor.com/m/VHsiL8B8P0wAAAAC/shincore-wave-emoji.gif" height="30" width="50">
