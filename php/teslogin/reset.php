@@ -1,8 +1,9 @@
 <?php
 session_start();
 if (!isset($_SESSION['profile_name'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +32,10 @@ if (!isset($_SESSION['profile_name'])) {
         height: 420px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    form:hover{
+        transform: scale(1.02);
     }
     .container{
         width: 100%;
@@ -89,13 +94,13 @@ if (!isset($_SESSION['profile_name'])) {
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.5s, font-size 0.5s;
+        transition: akkall 0.1s;
         width: 150px; 
     }
     .reset:hover{
         background-color: #3e8e41;
-        font-size: larger;
-        transition: font-size .5s;
+        transform: translateY(-2px);
+
     }
     .hehe{
         animation: rainbow 14s infinite;
@@ -133,7 +138,7 @@ if (!isset($_SESSION['profile_name'])) {
 </style>
 <body>
     <form action="reset.php" method="post">
-        <h1>RESET PASSWORD</h1>
+        <h1 style="font-family: Arial, sans-serif;">RESET PASSWORD</h1>
         <div class="container">
             <div class="input-group">
                 <input type="email" class="input <?= isset($_SESSION['email']) ? 'has-value' : ''; ?>" name="email" value="<?= $_SESSION['email']; ?>" autocomplete="off" required>                
