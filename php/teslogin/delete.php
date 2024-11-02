@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['profile_name'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 ?>
@@ -32,25 +32,30 @@ if (!isset($_SESSION['profile_name'])) {
         height: 420px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    form:hover{
+        transform: scale(1.02);
     }
     .button{
         display: flex;
-        gap: 100px;
+        justify-content: space-between;
+        gap: 40px;
+        margin-top: 20px;
     }
-    .delete {
+    .delete{
         background-color: #f44336;
         color: #fff;
         padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.5s, font-size 0.5s;
+        transition: all 0.3s;
         width: 150px;
     }
     .delete:hover{
         background-color: #d32f2f;
-        font-size: larger;
-        transition: font-size .5s;
+        transform: translateY(-2px);
     }
     .cancel{
         background-color: #4CAF50;
@@ -59,29 +64,29 @@ if (!isset($_SESSION['profile_name'])) {
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.5s, font-size 0.5s;
+        transition: all 0.1s;
         width: 150px;
     }
-    .cancel:hover {
+    .cancel:hover{
         background-color: #3e8e41;
-        font-size: larger;
-        transition: font-size .5s;
+        transform: translateY(-2px);
     }
-    .succeed {
+    .succeed{
         color: green;
     }
-    .error {
+    .error{
         color: red;
     }
 </style>
 <body>
     <form action="delete.php" method="post">
-        <h1>DELETE ACCOUNT</h1>
-        <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+        <h1 style="font-family: Arial, sans-serif;">DELETING YOUR ACCOUNT</h1>
+        <p style="margin-top: -10px;"> Are You Sure?</p>
+        <img src="https://media.tenor.com/zdtL9ixDfCwAAAAM/ishowspeed-try-not-to-laugh.gif" height="250" width="250" alt=""> 
         <div class="button">
-            <input type="submit" value="Yes" class="delete" name="delete" onclick="return confirm('Aare you sure you want to delete your account?')"></input>
-            <input type="submit" value="No" class="cancel" onclick="window.location.href='dashboard.php'"></input>
-        </div>
+            <input type="submit" value="Yes" class="delete" name="delete" onclick="return confirm('are you sure you want to delete your account?')"></input>
+            <button type="button" class="cancel" onclick="window.location.href='dashboard.php'">No</button>   
+        </div>    
         <?php
         include("service/database.php");
 
@@ -97,29 +102,15 @@ if (!isset($_SESSION['profile_name'])) {
             // Check if the account deletion was successful
             // Mengecek jika akun  berhasil dihapus
             if ($delete_result->affected_rows > 0) {
-                echo '<span class="succeed">Account deleted successfully</span>';
+                echo '<span class="succeed">account deleted successfully</span>';
                 session_destroy();
                 header("Location: dashboard.php");
                 exit();
             } else {
-                echo '<span class="error">Account deletion failed</span>';
+                echo '<span class="error">account deletion failed</span>';
             }
         } 
         ?>
     </form>
-    <script>
-        // Script agar saat input ada valuenya stay di atas
-        // Script to make the label stay above when input has value
-        const inputFields = document.querySelectorAll('.input-group input');
-        inputFields.forEach(inputField => {
-            inputField.addEventListener('input', () => {
-                if (inputField.value.trim() !== '') {
-                    inputField.classList.add('has-value');
-                } else {
-                    inputField.classList.remove('has-value');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
