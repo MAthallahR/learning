@@ -25,6 +25,10 @@
         height: 400px;
         width: 450px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    form:hover{
+        transform: scale(1.02);
     }
     .container{
         width: 100%;
@@ -124,7 +128,7 @@
 </style>
 <body>
     <form action="login.php" method="post">
-    <h1>LOGIN</h1>
+    <h1 style="font-family: Arial, sans-serif;">LOGIN</h1>
     <div class="container">
         <div class="input-group">
             <input type="text" class="input" name="username" autocomplete="off" required>
