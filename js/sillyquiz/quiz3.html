@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form{
+        background-color: white;
+        margin: auto;
+        margin-top: auto;
+        width: 500px;
+        height: 500px;
+    }
+    body{
+        background-image: url(https://pbs.twimg.com/media/GX_0GpYWIAAkfuj?format=jpg&name=large);
+    }
+    p{
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 50px;
+    }
+    .anthony{
+        height: 250px;
+        width: 250px;
+    }
+    .classgoat{
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+    @keyframes spin{
+            0% {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }
+    .spin{
+        animation: spin 0.5s linear infinite;
+    }
+    .goat {
+        animation: rainbow 10s infinite;
+    }
+    @keyframes rainbow{
+        0%{
+            color: #8D3DB6;
+        }
+        25%{
+            color: #F23700;
+        }
+        50%{
+            color: #00C2F3;
+        }
+        75%{
+            color: #F1E900;
+        }
+        100%{
+            color: #D4000C;
+        }
+    }
+</style>
+<body>
+    <form id="goatform">
+        <p>He Is the <span class="goat">Goat!!</span></p>
+        <div class="classgoat">
+            <img class="anthony"  id="anthony" src="https://assets.manutd.com/AssetPicker/images/0/0/20/88/1333340/21-Antony1719824409448.png">
+        </div>
+        <p>click him to make him spin!</p>
+    </form>
+    <script>
+        const anthony = document.getElementById('anthony');
+        anthony.addEventListener('click', () => {
+            anthony.classList.toggle('spin');
+        });
+    </script>
+</body>
+</html>
