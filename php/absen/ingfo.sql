@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 05, 2024 at 03:16 PM
+-- Generation Time: Nov 08, 2024 at 03:59 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -40,9 +40,31 @@ CREATE TABLE `absences` (
 --
 
 INSERT INTO `absences` (`id`, `name`, `class`, `absencestatus`, `absent_on`) VALUES
-(1, 'Cole Palmer', 'Class A', 'Present', '2024-11-05 21:43:12'),
-(2, 'Enzo Fernandez', 'Class A', 'Sick', '2024-11-05 21:48:52'),
-(3, 'Pedro Neto', 'Class B', 'Excused', '2024-11-05 21:48:59');
+(1, 'Cole Palmer', 'Class A', 'Present', '2024-11-08 21:16:38'),
+(2, 'Reece James', 'Class C', 'Sick', '2024-11-08 21:32:51'),
+(3, 'Mykhailo Mudryk', 'Class B', 'Excused', '2024-11-08 21:33:04'),
+(4, 'Noni Madueke', 'Class B', 'Present', '2024-11-08 21:38:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int NOT NULL,
+  `username` varchar(250) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `created_on`) VALUES
+(1, 'user', 'user', '2024-11-06 15:05:28'),
+(2, 'admin', 'admin', '2024-11-06 15:05:33');
 
 --
 -- Indexes for dumped tables
@@ -55,6 +77,13 @@ ALTER TABLE `absences`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -62,7 +91,13 @@ ALTER TABLE `absences`
 -- AUTO_INCREMENT for table `absences`
 --
 ALTER TABLE `absences`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
