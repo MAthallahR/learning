@@ -28,6 +28,18 @@
     .excused{
         background-color: #7ec4cf; 
     }
+    .delete{
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .delete:hover {
+        background-color: #ff1a1a; 
+    }
 </style>
 <body>
 
@@ -39,6 +51,7 @@
          <th>Name</th>
          <th>Absence Status</th>
          <th>Absent On</th>
+         <th>Actions</th>
      </tr>
         <?php
         include("database.php");
@@ -60,24 +73,30 @@
                         <td>{$row['name']}</td>
                         <td>{$row['absencestatus']}</td>
                         <td>{$row['absent_on']}</td>
+                        <td>
+                            <form action='delete.php' method='post' style='display:inline;'>
+                                    <input type='hidden' name='id' value='{$row['id']}'>
+                                <input type='submit' value='Delete' class='delete' onclick='return confirm(\"Are you sure you want to delete this record?\");'>
+                            </form>
+                        </td>
                       </tr>";
             }
         }else{
-            echo "<tr><td colspan='5'>no absence records</td></tr>";
+            echo "<tr><td colspan='6'>no absence records</td></tr>";
         }
         ?>
 </table>
 <div style="display: flex; flex-direction: column; margin-left: 472px;">
     <div style="display: flex; align-items: center; margin: 5px;">
-        <div style="background-color: #d4f9cc; width: 20px; height: 20px; margin-right: 5px;"></div>
+        <div style="background-color: #d4f9cc; width: 20px; height: 20px; margin-right: 5px; border:1.5px solid black;"></div>
         Present
     </div>
     <div style="display: flex; align-items: center; margin: 5px;">
-        <div style="background-color: #fff88f; width: 20px; height: 20px; margin-right: 5px;"></div>
+        <div style="background-color: #fff88f; width: 20px; height: 20px; margin-right: 5px; border:1.5px solid black;"></div>
         Sick
     </div>
     <div style="display: flex; align-items: center; margin: 5px;">
-        <div style="background-color: #7ec4cf; width: 20px; height: 20px; margin-right: 5px;"></div>
+        <div style="background-color: #7ec4cf; width: 20px; height: 20px; margin-right: 5px; border:1.5px solid black;"></div>
         Excused
     </div>
 </div>
