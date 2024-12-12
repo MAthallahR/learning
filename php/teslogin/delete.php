@@ -90,7 +90,7 @@ if (!isset($_SESSION['profile_name'])) {
         <?php
         include("service/database.php");
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete'])){
             $profile_name = $_SESSION['profile_name'];
         
             // Kode untuk menghapus akun
@@ -101,12 +101,12 @@ if (!isset($_SESSION['profile_name'])) {
         
             // Check if the account deletion was successful
             // Mengecek jika akun  berhasil dihapus
-            if ($delete_result->affected_rows > 0) {
+            if($delete_result->affected_rows > 0){
                 echo '<span class="succeed">account deleted successfully</span>';
                 session_destroy();
                 header("Location: dashboard.php");
                 exit();
-            } else {
+            }else{
                 echo '<span class="error">account deletion failed</span>';
             }
         } 
